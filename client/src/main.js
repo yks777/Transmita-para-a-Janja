@@ -518,6 +518,13 @@ function buildTile(p, { palco = false, semVideo = false, slot: slotDado = null }
     // real: sem este aviso ela é indistinguível de um travamento.
     if (!stream.started) tile.append(buildLoading());
 
+    // Badge de latência visível no tile
+    const lagBadge = document.createElement('span');
+    lagBadge.className = 'tile-lag';
+    lagBadge.dataset.lagSlot = slot;
+    lagBadge.textContent = '— ms';
+    tile.append(lagBadge);
+
     // O clique direito pode ser capturado pelo cliente do Discord antes de
     // chegar aqui, então o botão visível é o caminho garantido.
     const stop = document.createElement('button');
@@ -1212,6 +1219,19 @@ function ensureStatsTimer() {
     else if (!s.audio.temSom()) $('pSom').textContent = 'aguardando o áudio…';
     else if (volume === 0) $('pSom').textContent = 'silenciado aqui';
     else $('pSom').textContent = `tocando · ${Math.round(volume * 100)}%`;
+
+    // Atualizar badges de latência em todos os tiles visíveis
+    for (const [slot, st] of streams) {
+      const badge = document.querySelector(`[data-lag-slot="${slot}"]`);
+      if (!badge) continue;
+      if (st.viaRtc) {
+        resumoPeer(st.pc).then(({ rtt }) => {
+          badge.textContent = rtt !== null ? `${rtt} ms` : '— ms';
+        });
+      } else {
+        badge.textContent = `${Math.max(0, st.player.getLag())} ms`;
+      }
+    }
   }, 1000);
 }
 

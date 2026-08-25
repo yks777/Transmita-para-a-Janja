@@ -186,6 +186,7 @@ body {
 /* Na miniatura sobra pouco espaço: fica o nome, sai o resto. */
 .sidebar .tile-you,
 .sidebar .tile-watchers,
+.sidebar .tile-lag,
 .sidebar .watch-who {
   display: none;
 }
@@ -615,12 +616,27 @@ body {
 .tile-you {
   position: absolute;
   right: 8px;
-  top: 8px;
+  top: 32px;
   padding: 3px 8px;
   border-radius: 6px;
   background: rgba(0, 0, 0, 0.6);
   color: var(--muted);
   font-size: 11.5px;
+}
+
+.tile-lag {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.65);
+  color: var(--text);
+  font-size: 11.5px;
+  font-weight: 500;
+  pointer-events: none;
+  font-variant-numeric: tabular-nums;
+  z-index: 2;
 }
 
 @keyframes pulse {
@@ -1349,7 +1365,8 @@ button {
   }
 
   .tile-watchers,
-  .tile-you {
+  .tile-you,
+  .tile-lag {
     display: none;
   }
 }

@@ -1,7 +1,7 @@
 # Transmita para a Janja
 
 
-<div>
+<div align="center">
 <img src="icon.png" alt="Logo" width="150" height="150" >
 </div>
 

@@ -44,7 +44,7 @@ processo, escapa para um usuário que não pode fazer nada.
 ```bash
 sudo adduser --system --group --home /opt/sala-de-tela sala
 
-sudo -u sala git clone https://github.com/nicolastoledoo/transmita-para-a-janja.git /opt/sala-de-tela
+sudo -u sala git clone https://github.com/yks777/transmita-para-a-janja.git /opt/sala-de-tela
 cd /opt/sala-de-tela
 sudo -u sala npm ci
 sudo -u sala npm run build
